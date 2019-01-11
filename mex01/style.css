@@ -1,0 +1,267 @@
+:root {
+  --margin: 10px;
+	--acolor:#666;
+	--ahover:#ddd;
+	--dmargin: calc(var(--margin) * 2);
+}
+
+* {
+    margin: 0;
+		box-sizing: border-box;
+    padding: 0;
+}
+/* Here is our relatively positioned
+ * container div to hold the rest of the
+ * visualization */
+
+.sidebar2 {
+  grid-area: sidebar2;
+}
+
+.content {
+  grid-area: content;
+}
+
+.header {
+  grid-area: header;
+}
+path {
+  stroke-width: 1px;
+  stroke: white;
+  fill: #999;
+  cursor: pointer;
+}
+
+path.q0-5 {
+  fill: #ffffcc;
+}
+
+path.q1-5 {
+  fill: #c2e699;
+}
+
+path.q2-5 {
+  fill: #78c679;
+}
+
+path.q3-5 {
+  fill: #31a354;
+}
+
+path.q4-5 {
+  fill: #006837;
+}
+
+#vis-container {
+  color:var(--ahover);
+  position: relative;
+  width: 100%;
+  height: 700px;
+  margin-top: 10px;
+}
+
+.wrapper {
+    background-color: #fff;
+    color: #444;
+    display: grid;
+    grid-gap: 1em;
+		margin:auto;
+        grid-template-columns: auto;
+        grid-template-areas:
+        "header"
+				"content"
+        "sidebar2"; 
+  }
+
+    @media  only screen  and (min-width: 600px)  {
+    .wrapper {
+
+        grid-template-columns: auto;
+        grid-template-areas:
+        "header"
+				"content"
+        "sidebar2"; 
+    }
+    #vis-container{
+      height:70vh;
+      }
+    }
+
+    @media only screen and (min-width: 950px)   {
+        .wrapper {
+      grid-gap: 20px;
+      grid-template-columns:  750px auto;
+      grid-template-areas:
+      "header  header"
+      "content sidebar2";
+      max-width: 1020px;
+        }
+    }
+
+.box {
+  background-color: #444;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.header {
+  background-color: #999;
+}
+
+.sidebar2 {
+  background-color: #ccc;
+  color: #444;
+}
+
+
+/*
+
+
+*/
+
+
+
+.container {
+  width:calc(100% - var(--margin));
+  max-width:1080px;
+  margin:auto;
+}
+
+
+
+path:hover {
+  fill: brown;
+  fill-opacity: .7;
+}
+
+div.tooltip {	
+    z-index:20;
+    text-align: center;			
+		position:absolute;
+    height: 28px;
+		display:flex;
+		align-items:center;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size: 12px;		
+    background: rgba(255,255,255,0.8);
+    border: 1px solid black;
+    border-radius: 8px;			
+		color:var(--ahover);
+		display:none;
+}
+
+/* All the .annotation-step divs are inside
+ * #annotation-steps. z-index ensures annotations
+ * stay on top of visualization. */
+#vis-container h4, #vis-container p {
+    color: #a9a0a0;
+    background-color: #71717196;
+		text-align:center;
+		margin-bottom:var(--margin);
+}
+
+#annotation-steps {
+  z-index: 40;
+}
+
+#vis-nav {
+  margin-top:var(--margin);
+  z-index: 20;
+}
+
+/* This is where you would create the actual visualization.
+ * Right now, lets just change the background color. */
+
+#vis-canvas {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  overflow: hidden;
+  background-color: #eee;
+}
+
+/* By default, all annotation-steps are hidden. */
+
+.annotation-step {
+  position: absolute;
+  display: none;
+}
+.annotation p{
+	margin:var(--margin);
+	}
+
+/* Finally we can position each annotation exactly how
+ * we want. */
+
+
+#step1-left-annotation {
+}
+
+#step1-right-annotation {
+}
+
+#step2-center-annotation {
+}
+
+#step3-high-annotation {
+}
+
+#step3-low-annotation {
+}
+
+ 
+/* Basic styling for the step links */
+a.step-link {
+  padding: 5px;
+  background-color: #444;
+  color: var(--acolor);
+  text-decoration: none;
+}
+
+a.step-link:hover, a.active {
+  color: var(--ahover);
+}
+
+
+.info {
+    padding: 6px 8px;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+		
+}
+
+.legend {
+    line-height: 18px;
+    color: #555;
+}
+
+.legend i {
+		margin-top:8px;
+		margin-right:3px;
+    opacity: 0.7;
+		border-radius:50%;
+		padding:1px 8px;
+}
+
+
+
+#map {
+  position:absolute;
+  top:0;
+  bottom:0;
+  width:100%;
+}
+
+svg {
+  position: relative;
+}
+
+@media  only screen  and (max-width: 600px){
+  #vis-container{
+  height:60vh;
+  }  
+}
