@@ -2,29 +2,25 @@
 //const delaunay = d3.Delaunay.from(points);
 //const voronoi = delaunay.voronoi([0, 0, 960, 500]);
 
-
+//create a new map object with a carto tile
 var map = new L.Map("map").setView([23.1,-100.1],5)
     .addLayer(new L.TileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png",
 {attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
  maxZoom:18}
 		));
 
+//overlay an svg to the map
 var svg = d3.select(map.getPanes().overlayPane).append("svg").attr("class","map-svg"),
     g = svg.append("g").attr("class", "leaflet-zoom-hide");
 
 d3.json("mxstates-topo-simplify.json").then( (states) => {
   //
 
-var geoData = topojson.feature(states,states.objects.mxstates);
+  var geoData = topojson.feature(states,states.objects.mxstates), //states polygons
+    displayW = document.getElementById("vis-container").clientWidth,
+    displayH = document.getElementById("vis-container").clientHeight;
 
-	//
-
-var displayW = document.getElementById("vis-container").clientWidth;
-var displayH = document.getElementById("vis-container").clientHeight;
-
-console.log(displayW);
-console.log(displayH);
-
+ // to build a path first project using projectPoint
   var transform = d3.geoTransform({point: projectPoint}),
       path = d3.geoPath().projection(transform);
 
@@ -32,26 +28,27 @@ console.log(displayH);
 	var driv = d3.select("#vis-container").append("div").attr("class","tooltip").style("opacity", 0);
 	var tooltip = d3.select("body").append("div").attr("class","tooltip");
   //Position of the tooltip relative to the cursor
-var tooltipOffset = {x: 5, y: -25};
-//Move the tooltip to track the mouse
-function moveTooltip() {
-tooltip.style("top",(d3.event.pageY+tooltipOffset.y)+"px")
-      .style("left",(d3.event.pageX+tooltipOffset.x)+"px");
-}
-//Create a tooltip, hidden at the start
-function hideTooltip() {
-  tooltip.transition().duration(200)
-	.style("display","none");
-}
+  var tooltipOffset = {x: 5, y: -25};
+  //Move the tooltip to track the mouse
+  function moveTooltip() {
+      tooltip.style("top",(d3.event.pageY+tooltipOffset.y)+"px")
+        .style("left",(d3.event.pageX+tooltipOffset.x)+"px");
+  }
 
-function showTooltip(d) {
-  moveTooltip();
-  tooltip.style("color","black")
-	  .transition()
-		.duration(500)
-		.text(d.properties.NOM_ENT)
-		.style("display","flex");
-}
+  //Create a tooltip, hidden at the start
+  function hideTooltip() {
+    tooltip.transition().duration(200)
+	  .style("display","none");
+  }
+
+  function showTooltip(d) {
+    moveTooltip();
+    tooltip.style("color","black")
+	    .transition()
+		  .duration(500)
+		  .text(d.properties.NOM_ENT)
+		  .style("display","flex");
+  }
 
   var feature = g.selectAll("path")
       .data(geoData.features)
@@ -65,6 +62,9 @@ function showTooltip(d) {
 
   map.on("viewreset", reset);
   reset();
+  
+  d3.select("#bikes").on("change", reset);
+
 
   // Reposition the SVG to cover the features.
   function reset() {
@@ -82,6 +82,13 @@ function showTooltip(d) {
     feature.attr("d", path)
 		    .style("fill-opacity", 0.7);
 
+    
+    if(d3.select("#bikes").property("checked")){
+      feature.attr("d", path)
+        .style("fill-opacity", 1);
+      
+      }
+
 }
 
 
@@ -91,5 +98,6 @@ function showTooltip(d) {
     var point = map.latLngToLayerPoint(new L.LatLng(y, x));
     this.stream.point(point.x, point.y);
   }
+
 });
 

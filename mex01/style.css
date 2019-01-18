@@ -1,8 +1,16 @@
 :root {
+  --darkblue:#4985BA;
+  --lightblue: #8DC9FF;
+  --bgcolor:#f7fbff;
+  --blue:#5AA6E8;
+  --whiteblue: #D4EBFF;
   --margin: 10px;
 	--acolor:#666;
 	--ahover:#ddd;
+  --high:#ff4303;
+  --polygon:#999;
 	--dmargin: calc(var(--margin) * 2);
+	--halfmargin: calc(var(--margin) * 0.5);
 }
 
 * {
@@ -10,6 +18,10 @@
 		box-sizing: border-box;
     padding: 0;
 }
+
+html{
+  font-family:sans-serif;
+  }
 /* Here is our relatively positioned
  * container div to hold the rest of the
  * visualization */
@@ -25,11 +37,13 @@
 .header {
   grid-area: header;
 }
+
 path {
   stroke-width: 1px;
   stroke: white;
-  fill: #999;
+  fill: var(--darkblue);
   cursor: pointer;
+  transition:fill 0.2s ease;
 }
 
 path.q0-5 {
@@ -57,14 +71,13 @@ path.q4-5 {
   position: relative;
   width: 100%;
   height: 700px;
-  margin-top: 10px;
 }
 
 .wrapper {
     background-color: #fff;
     color: #444;
     display: grid;
-    grid-gap: 1em;
+    grid-gap: 0px;
 		margin:auto;
         grid-template-columns: auto;
         grid-template-areas:
@@ -89,7 +102,7 @@ path.q4-5 {
 
     @media only screen and (min-width: 950px)   {
         .wrapper {
-      grid-gap: 20px;
+      grid-gap: 0px;
       grid-template-columns:  750px auto;
       grid-template-areas:
       "header  header"
@@ -99,19 +112,18 @@ path.q4-5 {
     }
 
 .box {
-  background-color: #444;
-  color: #fff;
-  border-radius: 5px;
-  padding: 10px;
+  
 }
+
 
 .header {
   background-color: #999;
 }
 
 .sidebar2 {
-  background-color: #ccc;
-  color: #444;
+  background-color: var(--darkblue);
+  padding:var(--margin);
+  color: var(--whiteblue);
 }
 
 
@@ -131,9 +143,10 @@ path.q4-5 {
 
 
 path:hover {
-  fill: brown;
+  fill: var(--high);
   fill-opacity: .7;
 }
+
 
 div.tooltip {	
     z-index:20;
