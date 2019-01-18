@@ -38,7 +38,7 @@ html{
   grid-area: header;
 }
 
-path {
+path.states {
   stroke-width: 1px;
   stroke: white;
   fill: var(--darkblue);
@@ -46,6 +46,16 @@ path {
   transition:fill 0.2s ease;
 }
 
+path.voronoi {
+  stroke:black;
+  stroke-width:1px;
+  fill:none;
+  fill-opacity:0.5;
+  }
+
+.leaflet-overlay-pane svg path{
+    pointer-events: auto;
+}
 path.q0-5 {
   fill: #ffffcc;
 }
@@ -142,11 +152,10 @@ path.q4-5 {
 
 
 
-path:hover {
+path.states:hover {
   fill: var(--high);
   fill-opacity: .7;
 }
-
 
 div.tooltip {	
     z-index:20;

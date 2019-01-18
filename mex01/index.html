@@ -8,13 +8,14 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="d3.min.js"></script>
     <script src="topojson.min.js"></script>
+    <script src="d3-delaunay.min.js"></script>
  </head>
   <body>
 	<!--Step navigation UI-->
 		<div class="container">
 			<div class="wrapper">
 				<div id="box header">
-            <p>Holi</p>
+            <p>How would the administrative divisions of Mexico look like if each state was formed by all the territory that is closer to it that to any other state?</p>
 				</div>
 
 	<!--Container for visualization-->
@@ -31,9 +32,15 @@
             <div class="options">
               <form action="javascript:handleIt">
                 <input type="checkbox" name="bikes" id="bikes">
-                Traffic incidents with Bikes involved:
+                Turn Voronoi Diagram on
               </form>
-              <p> Colisión con ciclista Hecho en el cual un vehículo automotor de cualquier tipo, arrolla a un ciclista sobre la vía de circulación o en un cruce vial</p>
+              <p>The Voronoi Diagram was built from the centroids of the mexican states</p>
+              <p>I had to follow a lot of tutorials to build this map:</P>
+              <ul>
+                <li><a href="https://bost.ocks.org/mike/leaflet/">Mike Bostock's D3+Leaflet</a></li>
+                <li><a href="http://deneli.us/an-introduction-to-d3-js-and-leaflet/">John McCrae's Introduction to Leaflet and D3</a></li>
+                <li><a href="https://gist.github.com/siyafrica/5807455bae654ffe89a0?short_path=aae3464">Siyafrica's GitHub</a></li>
+              </ul>
             </div>
         </div>
 			</div>
